@@ -7,31 +7,32 @@ const code = params.get('code');
 const date = new Date().getDate();
 
 // fetches the song only once a day
-if(date != Number(localStorage.getItem('date'))){
-    localStorage.setItem('date', date);
+if(localStorage.getItem('connected') === 'true'){
+    if(date != Number(localStorage.getItem('date'))){
+        localStorage.setItem('date', date);
 
 
-    if(!code) {
-        redirectToAuthCodeFlow(client_id);
-    } else {
-        document.getElementById('connect').style.visibility = 'hidden';
-        document.getElementById('spotifyEmbed').style.visibility = 'visible';
-
-        if(localStorage.getItem('refresh_token')===null){
-            const access_token = await getAccessToken(client_id, code);
-            const liked_songs = await fetchLikedSong(access_token);
-            localStorage.setItem('song_of_the_day', JSON.stringify(liked_songs.items[0].track));
-            // console.log(liked_songs)
+        if(!code) {
+            redirectToAuthCodeFlow(client_id);
         } else {
-            const access_token = await useRefreshToken(client_id);
-            const liked_songs = await fetchLikedSong(access_token);
-            localStorage.setItem('song_of_the_day', JSON.stringify(liked_songs.items[0].track));
-            // console.log(liked_songs)
+            document.getElementById('connect').style.visibility = 'hidden';
+            document.getElementById('spotifyEmbed').style.visibility = 'visible';
+
+            if(localStorage.getItem('refresh_token')===null){
+                const access_token = await getAccessToken(client_id, code);
+                const liked_songs = await fetchLikedSong(access_token);
+                localStorage.setItem('song_of_the_day', JSON.stringify(liked_songs.items[0].track));
+                // console.log(liked_songs)
+            } else {
+                const access_token = await useRefreshToken(client_id);
+                const liked_songs = await fetchLikedSong(access_token);
+                localStorage.setItem('song_of_the_day', JSON.stringify(liked_songs.items[0].track));
+                // console.log(liked_songs)
+            }
         }
     }
+    displayTrack(JSON.parse(localStorage.getItem('song_of_the_day')));
 }
-displayTrack(JSON.parse(localStorage.getItem('song_of_the_day')));
-
 
 // ---------------------
 // ------ METHODS ------
