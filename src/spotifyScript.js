@@ -14,7 +14,7 @@ if(localStorage.getItem('connected') === 'true'){
     document.getElementById('connect').style.display = 'none';
     document.getElementById('spotifyEmbed').style.display = 'inline';
 
-    if(!code | code=='null') {
+    if(!code || code=='null') {
         redirectToAuthCodeFlow(client_id);
     } else if(date != Number(localStorage.getItem('date'))){
         localStorage.setItem('date', date); 
