@@ -6,48 +6,53 @@ const code = params.get('code');
 
 const date = new Date().getDate();
 
-// if(document.getElementById('delete').checked){
-//     localStorage.clear();
-// }
 
 // fetches the song only once a day
 if(localStorage.getItem('connected') === 'true'){
-    console.log(code);
 
-    if(!code) {
-        redirectToAuthCodeFlow(client_id);
+    if(date != Number(localStorage.getItem('date'))){
+        localStorage.setItem('date', date); 
+        
+        await update();
     }
-    //  else if(date != Number(localStorage.getItem('date'))){
-    //     localStorage.setItem('date', date);
-
-        document.getElementById('connect').style.visibility = 'hidden';
-        document.getElementById('spotifyEmbed').style.visibility = 'visible';
-
-        if(localStorage.getItem('refresh_token')===null){
-            const access_token = await getAccessToken(client_id, code);
-            const liked_songs = await fetchLikedSong(access_token);
-            localStorage.setItem('song_of_the_day', JSON.stringify(liked_songs.items[0].track));
-            // console.log(liked_songs)
-        } else {
-            const access_token = await useRefreshToken(client_id);
-            const liked_songs = await fetchLikedSong(access_token);
-            localStorage.setItem('song_of_the_day', JSON.stringify(liked_songs.items[0].track));
-            // console.log(liked_songs)
-        }
-    // }
     displayTrack(JSON.parse(localStorage.getItem('song_of_the_day')));
 }
+// forced refresh
+document.getElementById('refresh').addEventListener('click', ()=>{
+    update();
+    displayTrack(JSON.parse(localStorage.getItem('song_of_the_day')));
+})
 
 // ---------------------
 // ------ METHODS ------
 // ---------------------
+
+async function update(){
+    if(!code) {
+        redirectToAuthCodeFlow(client_id);
+    }
+
+    document.getElementById('connect').style.visibility = 'hidden';
+    document.getElementById('spotifyEmbed').style.visibility = 'visible';
+
+    if(localStorage.getItem('refresh_token')===null){
+        const access_token = await getAccessToken(client_id, code);
+        const liked_songs = await fetchLikedSong(access_token);
+        localStorage.setItem('song_of_the_day', JSON.stringify(liked_songs.items[0].track));
+        // console.log(liked_songs)
+    } else {
+        const access_token = await useRefreshToken(client_id);
+        const liked_songs = await fetchLikedSong(access_token);
+        localStorage.setItem('song_of_the_day', JSON.stringify(liked_songs.items[0].track));
+        // console.log(liked_songs)
+    }
+}
 
 // redirecting to spotify for authorization
 async function redirectToAuthCodeFlow(client_id) {
     const verifier = generateCodeVerifier(128);
     const challenge = await generateCodeChallenge(verifier);
 
-    console.log(verifier);
     localStorage.setItem('verifier', verifier)
 
     const params = new URLSearchParams();
@@ -92,7 +97,6 @@ async function getAccessToken(client_id, code){
     params.append('code', code);
     params.append('redirect_uri', redirect_uri);
     params.append('code_verifier', verifier);
-    console.log(params);
 
     const res = await fetch('https://accounts.spotify.com/api/token', {
         method: 'POST',
@@ -101,7 +105,6 @@ async function getAccessToken(client_id, code){
     });
 
     const result = await res.json();
-    console.log('result in AccessToken:\n '+result);
     localStorage.setItem('refresh_token', result.refresh_token);
     return result.access_token;
 }
