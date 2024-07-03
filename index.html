@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Tab</title>
+    <script src="src/spotifyScript.js" type="module"></script>
+    <link rel="stylesheet" href="style.css">
+
+</head>
+<body>
+    <main>
+        <section id="music">
+            <div id="track">
+                <p class="boxTitle">Your daily liked song!</p>
+                <iframe style="border-radius:12px" src="" width="100%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+            </div>
+        </section>
+        <section id="search">
+
+            <div id="searchBox"> if I get it working, search box goes here: <br>
+                <p class="boxTitle">Search</p>
+            </div>
+
+            <div id="shortcuts">
+                <p class="boxTitle">Shortcuts</p>
+
+                <div class="container">
+                    <a href="https://twitter.com" class="link" id="twitter">
+                        <img src="icons/twitter.png" alt="" class="icon">
+                        <h4>Twitter</h4>
+                    </a>
+                    <a href="https://reddit.com" class="link" id="reddit">
+                        <img src="https://www.redditstatic.com/shreddit/assets/favicon/180x180.png" alt="" class="icon">
+                        <h4>Reddit</h4>
+                    </a>
+                    <a href="https://www.tumblr.com/" class="link" id="tumblr">
+                        <img src="icons/tumblr.png" alt="" class="icon">
+                        <h4>Tumblr</h4>
+                    </a>
+                </div>
+            </div>
+
+            <button onclick="console.log(localStorage)">Log Local Storage</button>
+        </section>
+    </main>
+</body>
+</html>

@@ -1,0 +1,59 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Tahoma;
+}
+a{
+    text-decoration: none;
+}
+body{
+    background-color: #fd5fc8;
+}
+
+/* #searchBox{
+    display: none;
+} */
+#music{
+    float: left;
+    width: 30%;
+}
+#search{
+    float: left;
+    width: 70%;
+}
+
+section > *{
+    background-color: #e7e7de;
+    margin: 0 20px 0 20px;
+}
+section > div{
+    border: 1.9em solid transparent;
+    border-image: url('border.png') 30;
+    position: relative;
+
+    border-radius: 10px;
+}
+.boxTitle{
+    position: absolute;
+    top: -1.5em;
+    left: -1.3em;
+
+    color: white;
+    font-weight: bold;
+}
+
+/* shortcuts */
+.container{
+    display: flex;
+    gap: 40px;
+}
+.link{
+    width: 10%;
+    /* border: black solid 2px; */
+    text-align: center;
+}
+.icon{
+    width: 100%;
+    border-radius: 10%;
+}
