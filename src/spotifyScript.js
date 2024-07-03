@@ -9,16 +9,14 @@ const date = new Date().getDate();
 
 // fetches the song only once a day
 if(localStorage.getItem('connected') === 'true'){
-    if(!code) {
-        redirectToAuthCodeFlow(client_id);
-    }
 
     document.getElementById('connect').style.visibility = 'hidden';
     document.getElementById('spotifyEmbed').style.visibility = 'visible';
 
-    if(date != Number(localStorage.getItem('date'))){
+    if(!code) {
+        redirectToAuthCodeFlow(client_id);
+    } else if(date != Number(localStorage.getItem('date'))){
         localStorage.setItem('date', date); 
-        
         await update();
     }
     displayTrack(JSON.parse(localStorage.getItem('song_of_the_day')));
