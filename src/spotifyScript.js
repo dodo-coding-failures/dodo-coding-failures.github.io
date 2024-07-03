@@ -6,9 +6,9 @@ const code = params.get('code');
 
 const date = new Date().getDate();
 
-if(document.getElementById('delete').checked){
-    localStorage.clear();
-}
+// if(document.getElementById('delete').checked){
+//     localStorage.clear();
+// }
 
 // fetches the song only once a day
 if(localStorage.getItem('connected') === 'true'){
