@@ -2,7 +2,8 @@
 const redirect_uri = 'https://dodo-coding-failures.github.io/';
 const client_id = 'e20a72be31d34b419481d0ea396d5a36';
 const params = new URLSearchParams(window.location.search);
-const code = params.get('code');
+localStorage.setItem('code', params.get('code'));
+const code = localStorage.getItem('code');
 
 const date = new Date().getDate();
 
@@ -13,7 +14,7 @@ if(localStorage.getItem('connected') === 'true'){
     document.getElementById('connect').style.display = 'none';
     document.getElementById('spotifyEmbed').style.display = 'inline';
 
-    if(!code) {
+    if(!code | code=='null') {
         redirectToAuthCodeFlow(client_id);
     } else if(date != Number(localStorage.getItem('date'))){
         localStorage.setItem('date', date); 
