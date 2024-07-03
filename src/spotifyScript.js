@@ -9,27 +9,27 @@ const date = new Date().getDate();
 // fetches the song only once a day
 if(localStorage.getItem('connected') === 'true'){
     console.log(code);
+
+    if(!code) {
+        redirectToAuthCodeFlow(client_id);
+    }
+
     if(date != Number(localStorage.getItem('date'))){
         localStorage.setItem('date', date);
 
+        document.getElementById('connect').style.visibility = 'hidden';
+        document.getElementById('spotifyEmbed').style.visibility = 'visible';
 
-        if(!code) {
-            redirectToAuthCodeFlow(client_id);
+        if(localStorage.getItem('refresh_token')===null){
+            const access_token = await getAccessToken(client_id, code);
+            const liked_songs = await fetchLikedSong(access_token);
+            localStorage.setItem('song_of_the_day', JSON.stringify(liked_songs.items[0].track));
+            // console.log(liked_songs)
         } else {
-            document.getElementById('connect').style.visibility = 'hidden';
-            document.getElementById('spotifyEmbed').style.visibility = 'visible';
-
-            if(localStorage.getItem('refresh_token')===null){
-                const access_token = await getAccessToken(client_id, code);
-                const liked_songs = await fetchLikedSong(access_token);
-                localStorage.setItem('song_of_the_day', JSON.stringify(liked_songs.items[0].track));
-                // console.log(liked_songs)
-            } else {
-                const access_token = await useRefreshToken(client_id);
-                const liked_songs = await fetchLikedSong(access_token);
-                localStorage.setItem('song_of_the_day', JSON.stringify(liked_songs.items[0].track));
-                // console.log(liked_songs)
-            }
+            const access_token = await useRefreshToken(client_id);
+            const liked_songs = await fetchLikedSong(access_token);
+            localStorage.setItem('song_of_the_day', JSON.stringify(liked_songs.items[0].track));
+            // console.log(liked_songs)
         }
     }
     displayTrack(JSON.parse(localStorage.getItem('song_of_the_day')));
