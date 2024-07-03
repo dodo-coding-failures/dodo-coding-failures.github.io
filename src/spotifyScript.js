@@ -136,6 +136,8 @@ async function useRefreshToken(client_id){
 async function fetchLikedSong(token){
     const count = Number(localStorage.getItem('liked_songs'));
     const offset = Math.floor(Math.random()*count);
+
+    console.log('fetching, offset: '+offset+"\n token: "+token)
     const res = await fetch('https://api.spotify.com/v1/me/tracks?limit=1&offset='+offset,{
         method: 'GET',
         headers: {
