@@ -1,3 +1,5 @@
+const { ViteRuntime } = require("vite/runtime");
+
 // const redirect_uri = 'http://localhost:5173/callback';
 const redirect_uri = 'https://dodo-coding-failures.github.io/';
 const client_id = 'e20a72be31d34b419481d0ea396d5a36';
@@ -47,6 +49,7 @@ async function redirectToAuthCodeFlow(client_id) {
     const verifier = generateCodeVerifier(128);
     const challenge = await generateCodeChallenge(verifier);
 
+    console.log(verifier);
     localStorage.setItem('verifier', verifier)
 
     const params = new URLSearchParams();
@@ -100,6 +103,7 @@ async function getAccessToken(client_id, code){
     });
 
     const result = await res.json();
+    console.log('result in AccessToken:\n '+result);
     localStorage.setItem('refresh_token', result.refresh_token);
     return result.access_token;
 }
