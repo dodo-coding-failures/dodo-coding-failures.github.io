@@ -1,5 +1,3 @@
-const { ViteRuntime } = require("vite/runtime");
-
 // const redirect_uri = 'http://localhost:5173/callback';
 const redirect_uri = 'https://dodo-coding-failures.github.io/';
 const client_id = 'e20a72be31d34b419481d0ea396d5a36';
