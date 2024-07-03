@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>New Tab</title>
-    <script src="src/spotifyScript.js" type="module"></script>
+    <!-- <script src="src/spotifyScript.js" type="module"></script> -->
     <link rel="stylesheet" href="style.css">
 
 </head>
@@ -53,5 +53,39 @@
             <button id="refresh">Force refresh the song</button>
         </section>
     </main>
+    <div id="catbox">
+        <pre id="cat">   
+        </pre>
+        <script>
+            const kitty = document.getElementById('cat');
+            let state = 0;
+            setInterval(()=>{
+                switch (state) {
+                    case 0:
+kitty.textContent = `
+    ♪
+　　∧＿∧　　
+　 （´・ω・｀ ∩
+　　o　　　 ,ﾉ  ♪
+　　Ｏ＿　.ﾉ
+♪　 　 (ノ
+`
+                        state = 1;
+                        break;
+                    case 1:
+kitty.textContent = `
+
+　　∧＿∧　♪
+　 ∩・ω・｀）
+♪ |　　 ⊂ﾉ
+ 　｜　　 _⊃　　♪
+ 　 し ⌒
+`
+                        state = 0;
+                        break;
+                }
+            }, 1000)
+        </script>
+    </div>
 </body>
 </html>

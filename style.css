@@ -3,6 +3,7 @@
     padding: 0;
     box-sizing: border-box;
     font-family: Tahoma;
+    /* font-family: 'ＭＳ Ｐゴシック'; */
 }
 a{
     text-decoration: none;
@@ -72,8 +73,23 @@ section > div{
     padding: 10px;
     /* border: black solid 2px; */
     text-align: center;
+
+    transition: background-color 0.5s;
 }   
+.link:hover{
+    background-color: rgb(0, 255, 255, 0.5);
+}
 .icon{
     width: 100%;
     border-radius: 10%;
+}
+
+/* catbox */
+#catbox{
+    position: absolute;
+    bottom: 0;
+    right: 0;
+}
+#cat{
+    font-family: 'ＭＳ Ｐゴシック';
 }
