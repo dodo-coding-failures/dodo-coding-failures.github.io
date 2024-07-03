@@ -16,8 +16,9 @@ if(localStorage.getItem('connected') === 'true'){
 
     if(!code) {
         redirectToAuthCodeFlow(client_id);
-    } else if(date != Number(localStorage.getItem('date'))){
-        localStorage.setItem('date', date);
+    }
+    //  else if(date != Number(localStorage.getItem('date'))){
+    //     localStorage.setItem('date', date);
 
         document.getElementById('connect').style.visibility = 'hidden';
         document.getElementById('spotifyEmbed').style.visibility = 'visible';
@@ -33,7 +34,7 @@ if(localStorage.getItem('connected') === 'true'){
             localStorage.setItem('song_of_the_day', JSON.stringify(liked_songs.items[0].track));
             // console.log(liked_songs)
         }
-    }
+    // }
     displayTrack(JSON.parse(localStorage.getItem('song_of_the_day')));
 }
 
@@ -79,6 +80,7 @@ async function generateCodeChallenge(codeVerifier) {
         .replace(/=+$/, '');
 }
 
+
 // gets access token with code
 async function getAccessToken(client_id, code){
     const verifier = localStorage.getItem('verifier');
@@ -102,6 +104,7 @@ async function getAccessToken(client_id, code){
     return result.access_token;
 }
 
+
 // get access token using refresh token
 async function useRefreshToken(client_id){
     const refresh_token=localStorage.getItem('refresh_token');
@@ -122,6 +125,7 @@ async function useRefreshToken(client_id){
     return result.access_token;
 
 }
+
 
 // make web api calls
 async function fetchLikedSong(token){
@@ -147,6 +151,7 @@ function updateSongCount(amount){
     }
 
 }
+
 
 // display the track
 function displayTrack(song){
