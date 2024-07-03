@@ -10,6 +10,9 @@ const date = new Date().getDate();
 // fetches the song only once a day
 if(localStorage.getItem('connected') === 'true'){
 
+    document.getElementById('connect').style.visibility = 'hidden';
+    document.getElementById('spotifyEmbed').style.visibility = 'visible';
+    
     if(date != Number(localStorage.getItem('date'))){
         localStorage.setItem('date', date); 
         
@@ -31,9 +34,6 @@ async function update(){
     if(!code) {
         redirectToAuthCodeFlow(client_id);
     }
-
-    document.getElementById('connect').style.visibility = 'hidden';
-    document.getElementById('spotifyEmbed').style.visibility = 'visible';
 
     if(localStorage.getItem('refresh_token')===null){
         const access_token = await getAccessToken(client_id, code);
