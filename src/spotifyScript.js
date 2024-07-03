@@ -1,8 +1,8 @@
-// const redirect_uri = 'http://localhost:5173/callback';
-const redirect_uri = 'https://dodo-coding-failures.github.io/';
+const redirect_uri = 'http://localhost:5173/callback';
+// const redirect_uri = 'https://dodo-coding-failures.github.io/';
 const client_id = 'e20a72be31d34b419481d0ea396d5a36';
 const params = new URLSearchParams(window.location.search);
-if (!params.get('code')){
+if (params.get('code') != null){
     localStorage.setItem('code', params.get('code'));
 }
 const code = localStorage.getItem('code');
@@ -17,8 +17,6 @@ if(localStorage.getItem('connected') === 'true'){
     document.getElementById('spotifyEmbed').style.display = 'inline';
 
     if(code=='null' || !code) {
-        console.log(code)
-        console.log('no code mate')
         redirectToAuthCodeFlow(client_id);
     } else if(date != Number(localStorage.getItem('date'))){
         localStorage.setItem('date', date); 
