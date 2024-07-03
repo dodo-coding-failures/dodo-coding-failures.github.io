@@ -22,8 +22,8 @@ if(localStorage.getItem('connected') === 'true'){
     displayTrack(JSON.parse(localStorage.getItem('song_of_the_day')));
 }
 // forced refresh
-document.getElementById('refresh').addEventListener('click', ()=>{
-    update();
+document.getElementById('refresh').addEventListener('click', async function(){
+    await update();
     displayTrack(JSON.parse(localStorage.getItem('song_of_the_day')));
 })
 
