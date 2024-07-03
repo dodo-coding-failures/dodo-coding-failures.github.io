@@ -8,6 +8,7 @@ const date = new Date().getDate();
 
 // fetches the song only once a day
 if(localStorage.getItem('connected') === 'true'){
+    console.log(code);
     if(date != Number(localStorage.getItem('date'))){
         localStorage.setItem('date', date);
 
