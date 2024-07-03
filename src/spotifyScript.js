@@ -35,7 +35,7 @@ document.getElementById('refresh').addEventListener('click', async function(){
 // ---------------------
 
 async function update(){
-    if(localStorage.getItem('refresh_token')===null){
+    if(localStorage.getItem('refresh_token')===null || localStorage.getItem('refresh_token')==='undefined'){
         const access_token = await getAccessToken(client_id, code);
         const liked_songs = await fetchLikedSong(access_token);
         localStorage.setItem('song_of_the_day', JSON.stringify(liked_songs.items[0].track));
