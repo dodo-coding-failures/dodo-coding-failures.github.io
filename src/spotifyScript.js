@@ -38,6 +38,12 @@ if(localStorage.getItem('connected') === 'true'){
 // ------ METHODS ------
 // ---------------------
 
+// triggering the connection to Spotify
+function connect(){
+    localStorage.setItem('connected', true);
+    location.reload();
+}
+
 // redirecting to spotify for authorization
 async function redirectToAuthCodeFlow(client_id) {
     const verifier = generateCodeVerifier(128);
