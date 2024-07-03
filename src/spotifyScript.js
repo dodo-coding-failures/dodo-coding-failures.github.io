@@ -63,8 +63,6 @@ async function redirectToAuthCodeFlow(client_id) {
     params.append('code_challenge_method', 'S256');
     params.append('code_challenge', challenge);
 
-    alert('GOING TO SPOTIFY')
-
     document.location = `https://accounts.spotify.com/authorize?${params.toString()}`;
 }
 
