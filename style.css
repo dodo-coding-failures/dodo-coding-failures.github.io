@@ -58,8 +58,8 @@ section > div{
 
 /* music */
 #spotifyEmbed{
-    /* display: none; */
-    visibility: hidden;
+    display: none;
+    /* visibility: hidden; */
 }
 
 /* shortcuts */

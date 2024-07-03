@@ -10,8 +10,8 @@ const date = new Date().getDate();
 // fetches the song only once a day
 if(localStorage.getItem('connected') === 'true'){
 
-    document.getElementById('connect').style.visibility = 'hidden';
-    document.getElementById('spotifyEmbed').style.visibility = 'visible';
+    document.getElementById('connect').style.display = 'none';
+    document.getElementById('spotifyEmbed').style.display = 'inline';
 
     if(!code) {
         redirectToAuthCodeFlow(client_id);
