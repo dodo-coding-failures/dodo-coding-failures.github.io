@@ -16,9 +16,7 @@ if(localStorage.getItem('connected') === 'true'){
 
     if(!code) {
         redirectToAuthCodeFlow(client_id);
-    }
-
-    if(date != Number(localStorage.getItem('date'))){
+    } else if(date != Number(localStorage.getItem('date'))){
         localStorage.setItem('date', date);
 
         document.getElementById('connect').style.visibility = 'hidden';
