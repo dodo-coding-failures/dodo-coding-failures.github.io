@@ -146,6 +146,7 @@ async function fetchLikedSong(token){
     });
 
     const result = await res.json();
+    console.log(result);
     updateSongCount(result.total);
     return await result;
 }
