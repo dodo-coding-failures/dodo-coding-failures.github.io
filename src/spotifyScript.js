@@ -105,6 +105,7 @@ async function getAccessToken(client_id, code){
     });
 
     const result = await res.json();
+    console.log(result)
     localStorage.setItem('refresh_token', result.refresh_token);
     return result.access_token;
 }
@@ -126,6 +127,7 @@ async function useRefreshToken(client_id){
     });
 
     const result = await res.json();
+    console.log(result)
     localStorage.setItem('refresh_token', result.refresh_token);
     return result.access_token;
 
