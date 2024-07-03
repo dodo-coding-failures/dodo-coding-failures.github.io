@@ -10,6 +10,17 @@ a{
 body{
     background-color: #fd5fc8;
 }
+button{
+    border: 5px rgb(105, 177, 95);
+    border-style: ridge;
+    border-radius: 5px;
+    
+    padding: 5px;
+    font-size: 1em;
+}
+button:active{
+    border-style: solid;
+}
 
 /* #searchBox{
     display: none;
@@ -30,9 +41,11 @@ section > *{
 section > div{
     border: 1.9em solid transparent;
     border-image: url('border.png') 30;
-    position: relative;
-
     border-radius: 10px;
+
+    position: relative;
+    padding-top: 1.9em;
+    margin-top: 20px;
 }
 .boxTitle{
     position: absolute;
@@ -45,7 +58,7 @@ section > div{
 
 /* music */
 #spotifyEmbed{
-    visibility: hidden;
+    display: none;
 }
 
 /* shortcuts */
@@ -55,9 +68,10 @@ section > div{
 }
 .link{
     width: 10%;
+    padding: 10px;
     /* border: black solid 2px; */
     text-align: center;
-}
+}   
 .icon{
     width: 100%;
     border-radius: 10%;

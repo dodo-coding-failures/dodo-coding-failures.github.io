@@ -13,8 +13,8 @@ if(localStorage.getItem('connected') === 'true'){
         redirectToAuthCodeFlow(client_id);
     }
 
-    document.getElementById('connect').style.visibility = 'hidden';
-    document.getElementById('spotifyEmbed').style.visibility = 'visible';
+    document.getElementById('connect').style.display = 'none';
+    document.getElementById('spotifyEmbed').style.display = 'initial';
 
     if(date != Number(localStorage.getItem('date'))){
         localStorage.setItem('date', date); 
