@@ -1,5 +1,5 @@
 // const redirect_uri = 'http://localhost:5173/callback';
-const redirect_uri = 'https://dodo-coding-failures.github.io';
+const redirect_uri = 'https://dodo-coding-failures.github.io/callback';
 const client_id = 'e20a72be31d34b419481d0ea396d5a36';
 const params = new URLSearchParams(window.location.search);
 const code = params.get('code');
@@ -14,6 +14,9 @@ if(date != Number(localStorage.getItem('date'))){
     if(!code) {
         redirectToAuthCodeFlow(client_id);
     } else {
+        document.getElementById('connect').style.visibility = 'hidden';
+        document.getElementById('spotifyEmbed').style.visibility = 'visible';
+
         if(localStorage.getItem('refresh_token')===null){
             const access_token = await getAccessToken(client_id, code);
             const liked_songs = await fetchLikedSong(access_token);

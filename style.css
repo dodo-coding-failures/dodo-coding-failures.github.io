@@ -43,6 +43,11 @@ section > div{
     font-weight: bold;
 }
 
+/* music */
+#spotifyEmbed{
+    visibility: hidden;
+}
+
 /* shortcuts */
 .container{
     display: flex;
