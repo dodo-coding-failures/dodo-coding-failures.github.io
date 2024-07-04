@@ -69,7 +69,7 @@ section > div{
     gap: 40px;
 }
 .link{
-    width: 10%;
+    width: 100px;
     padding: 10px;
     /* border: black solid 2px; */
     text-align: center;
@@ -82,6 +82,7 @@ section > div{
 .icon{
     width: 100%;
     border-radius: 10%;
+    filter: hue-rotate(-15deg);
 }
 
 /* catbox */
