@@ -1,3 +1,4 @@
+/* General */
 *{
     margin: 0;
     padding: 0;
@@ -23,14 +24,13 @@ button:active{
     border-style: solid;
 }
 
-/* #searchBox{
-    display: none;
-} */
-#music{
+
+/* Main sections */
+#misc{
     float: left;
     width: 30%;
 }
-#search{
+#essentials{
     float: left;
     width: 70%;
 }
@@ -57,11 +57,12 @@ section > div{
     font-weight: bold;
 }
 
+
 /* music */
 #spotifyEmbed{
     display: none;
-    /* visibility: hidden; */
 }
+
 
 /* shortcuts */
 .container{
@@ -71,7 +72,6 @@ section > div{
 .link{
     width: 100px;
     padding: 10px;
-    /* border: black solid 2px; */
     text-align: center;
 
     transition: background-color 0.5s;
@@ -84,6 +84,7 @@ section > div{
     border-radius: 10%;
     filter: hue-rotate(-15deg);
 }
+
 
 /* catbox */
 #catbox{
