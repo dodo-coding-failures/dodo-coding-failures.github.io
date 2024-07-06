@@ -26,15 +26,6 @@ button:active{
 
 
 /* Main sections */
-#misc{
-    float: left;
-    width: 30%;
-}
-#essentials{
-    float: left;
-    width: 70%;
-}
-
 section > *{
     background-color: #e7e7de;
     margin: 0 20px 0 20px;
@@ -58,20 +49,30 @@ section > div{
 }
 
 
-/* music */
-#spotifyEmbed{
-    display: none;
+/* search */
+#search{
+    display: flex;
+    justify-content: center;
+}
+#searchBox{
+    font-size: 1em;
+    width: 90%;
+    padding: .5em;
+    
 }
 
 
 /* shortcuts */
 .container{
     display: flex;
-    gap: 40px;
+    flex-wrap: wrap;
+    gap: 20px;
+
 }
 .link{
-    width: 100px;
-    padding: 10px;
+    width: 20vw;
+    max-width: 100px;
+    padding: 10px;  
     text-align: center;
 
     transition: background-color 0.5s;
@@ -86,12 +87,46 @@ section > div{
 }
 
 
+/* misc */
+#misc > button{
+    margin: 10px;
+}
+
+
+/* music */
+#spotifyEmbed{
+    display: none;
+}
+
+
 /* catbox */
 #catbox{
-    position: absolute;
+    position: fixed;
     bottom: 0;
     right: 0;
 }
 #cat{
     font-family: 'ＭＳ Ｐゴシック';
+}
+
+
+/* Mobile devices */
+@media screen and (max-width: 650px){
+    main{
+        display: flex;
+        flex-direction: column;
+    }
+    #essentials{ order: 1;}
+    #misc{ order: 2;}
+}
+/* Desktops */
+@media screen and (min-width: 651px){
+    #misc{
+        float: left;
+        width: 30%;
+    }
+    #essentials{
+        float: left;
+        width: 70%;
+    }
 }
