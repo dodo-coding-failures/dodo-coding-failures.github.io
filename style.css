@@ -26,16 +26,22 @@ button:active{
 
 
 /* Main sections */
-section > *{
+main{
+    height: 100vh;
+}
+main > *{
     background-color: #e7e7de;
     margin: 0 20px 0 20px;
 }
-section > div{
+main > div{
     border: 1.9em solid transparent;
     border-image: url('border.png') 30;
     border-radius: 10px;
 
+    width: fit-content;
     position: relative;
+    top: 0;
+    left: 0;
     padding-top: 1.9em;
     margin-top: 20px;
 }
@@ -43,9 +49,12 @@ section > div{
     position: absolute;
     top: -1.5em;
     left: -1.3em;
+    width: 100%;
 
     color: white;
     font-weight: bold;
+
+    user-select: none;
 }
 
 
@@ -96,6 +105,20 @@ section > div{
 /* music */
 #spotifyEmbed{
     display: none;
+}
+
+
+/* footer/devlog? */
+footer{
+    background-color: rgb(47, 53, 138);
+    color: white;
+    margin-top: 20px;
+}
+footer > *{
+    padding: 10px;
+}
+footer .date{
+    text-decoration: underline;
 }
 
 
