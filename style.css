@@ -23,7 +23,15 @@ button{
 button:active{
     border-style: solid;
 }
-
+.tooltip{
+    background-color: gray;
+    padding: 3px;
+    position: absolute;
+    left: 100%;
+    top: 0;
+    opacity: 70%;
+    visibility: hidden;
+}
 
 /* Main sections */
 main{
@@ -37,7 +45,7 @@ main > div{
     border: 1.9em solid transparent;
     border-image: url('border.png') 30;
     border-radius: 10px;
-
+    
     width: fit-content;
     position: relative;
     top: 0;
@@ -50,11 +58,29 @@ main > div{
     top: -1.5em;
     left: -1.3em;
     width: 100%;
-
+    
     color: white;
     font-weight: bold;
-
+    
     user-select: none;
+}
+
+#resetView{
+    position: relative;
+    margin: 0;
+    z-index: 1;
+    
+    height: 30px;
+    width: 30px;
+    background-image: url();
+    background-color: lime;
+    border: none;
+}
+#resetView:hover .tooltip{
+    visibility: visible;
+}
+#resetView:active{
+    background-image: url();
 }
 
 
