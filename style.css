@@ -129,6 +129,9 @@ main > div{
 
 
 /* music */
+#track  > button{
+    width: 20vw;
+}
 #spotifyEmbed{
     display: none;
 }

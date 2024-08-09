@@ -7,7 +7,7 @@ document.getElementById('resetView').addEventListener('click', ()=>{
     el = document.getElementById('track');
     el.style.position = 'absolute'
     el.style.top = (window.innerHeight-el.offsetHeight-50)+'px';
-    el.style.left = (window.innerWidth-el.offsetWidth)+'px';
+    el.style.left = (window.innerWidth-el.offsetWidth-50)+'px';
 
     el = document.getElementById('search');
     el.style.position = 'absolute'
@@ -20,4 +20,3 @@ document.getElementById('resetView').addEventListener('click', ()=>{
     el.style.left = (window.innerWidth/2-el.offsetWidth/2)+'px';
 
 });
-
