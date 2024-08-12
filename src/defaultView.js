@@ -1,4 +1,4 @@
-document.getElementById('resetView').addEventListener('click', ()=>{
+function defaultView() {
     let el = document.getElementById('debug');
     el.style.position = 'absolute'
     el.style.top = (window.innerHeight-el.offsetHeight-25)+'px';
@@ -18,5 +18,4 @@ document.getElementById('resetView').addEventListener('click', ()=>{
     el.style.position = 'absolute'
     el.style.top = (document.getElementById('search').offsetHeight+20)+'px';
     el.style.left = (window.innerWidth/2-el.offsetWidth/2)+'px';
-
-});
+}
