@@ -1,3 +1,7 @@
+document.getElementById('resetView').addEventListener('click', ()=>{
+    defaultView();
+})
+
 function defaultView() {
     let el = document.getElementById('debug');
     el.style.position = 'absolute'
