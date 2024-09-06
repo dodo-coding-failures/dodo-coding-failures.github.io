@@ -13,13 +13,19 @@ body{
     background-color: #fd5fc8;
 }
 button{
-    border: 5px rgb(105, 177, 95);
-    border-style: ridge;
-    border-radius: 5px;
+    border: outset 2px white;
+    outline: solid black 1px;
     
     padding: 5px;
     font-size: 1em;
 }
+/* button::before{
+    content: ' ';
+    position: absolute;
+    z-index: -1;
+    border: solid black 5px;
+    top: 5px;
+} */
 button:active{
     border-style: solid;
 }

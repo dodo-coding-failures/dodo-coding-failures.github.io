@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Tab</title>
+    <script src="src/spotifyScript.js" type="module"></script>
+    <link rel="stylesheet" href="../style.css">
+
+</head>
+<body onload="defaultView()">
+    <main>
+        <button id="resetView">
+            <span class="tooltip">Reset to the default layout</span>
+        </button>
+        <!-- <section id="misc"> -->
+            <div id="track">
+                <p class="boxTitle">Your daily liked song!</p>
+                <button id="connect" onclick="connect()">Connect to Spotify to see daily randomly selected songs from your "Liked Songs" playlist</button>
+                <script>
+                    // triggering the connection to Spotify
+                    function connect(){
+                        localStorage.setItem('connected', true);
+                        location.reload();
+                    }
+                </script>
+                <iframe id="spotifyEmbed" style="border-radius:12px" src="" width="100%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+            </div>
+            <div id="debug">
+                <p class="boxTitle">Debug Menu</p>
+                <p style="opacity: 50%;">wait how are u even seeing this?</p>
+                <button id="refresh">Force refresh the song</button> <br>
+                <button onclick="console.log(localStorage)">Log Local Storage</button> <br>
+                <button  onclick="localStorage.clear()" style="color: red;">Clear Local Storage <br>! WARNING ! <br>Might break stuff</button>
+            </div>
+        <!-- </section>
+
+        <section id="essentials"> -->
+
+            <div id="search"><br>
+                <p class="boxTitle">Search</p>
+                <input id="searchBox" type="search" placeholder="Purely visual search box, non-functional (yet)">
+            </div>
+
+            <div id="shortcuts">
+                <p class="boxTitle">Shortcuts</p>
+
+                <!-- SHORTCUTS -->
+                <div class="container">
+                    <a href="https://twitter.com" class="link" id="twitter">
+                        <img src="icons/twitter.png" alt="twitter icon" class="icon">
+                        <h4>Twitter</h4>
+                    </a>
+                    <a href="https://reddit.com" class="link" id="reddit">
+                        <img src="icons/reddit.png" alt="reddit icon" class="icon">
+                        <h4>Reddit</h4>
+                    </a>
+                    <a href="https://www.tumblr.com/" class="link" id="tumblr">
+                        <img src="icons/tumblr.png" alt="tumblr icon" class="icon">
+                        <h4>Tumblr</h4>
+                    </a>
+                    <a href="https://www.youtube.com/" class="link" id="youtube">
+                        <img src="icons/youtube.png" alt="youtube icon" class="icon">
+                        <h4>Youtube</h4>
+                    </a>
+                    <a href="https://www.twitch.tv/" class="link" id="twitch">
+                        <img src="icons/twitch.png" alt="twitch icon" class="icon">
+                        <h4>Twitch</h4>
+                    </a>
+                </div>
+            </div>
+
+            <div id="wikis">
+                <p class="boxTitle" id="test">Wikis</p>
+            </div>
+        <script src="src/movableWindows.js"></script>
+        <script src="src/defaultView.js"></script>
+        <!-- </section> -->
+    </main>
+    <footer>
+        <h3>Developer notes</h3>
+        <p> Uhh hi? This part is less hectic, just some thoughts on the stuff here.</p>
+        <p><span class="date">9.08.2024:</span> So I've decided to change this site from the custom "New Tab" page, and more of a just personal project site. I know no one is reading this, but it's more of a reminder for myself ;)</p>
+    </footer>
+    <div id="catbox">
+        <pre id="cat">   
+        </pre>
+        <script>
+            const kitty = document.getElementById('cat');
+            let state = 0;
+            setInterval(()=>{
+                switch (state) {
+                    case 0:
+kitty.textContent = `
+    ♪
+　　∧＿∧　　
+　 （´・ω・｀ ∩
+　　o　　　 ,ﾉ  ♪
+　　Ｏ＿　.ﾉ
+♪　 　 (ノ
+`
+                        state = 1;
+                        break;
+                    case 1:
+kitty.textContent = `
+
+　　∧＿∧　♪
+　 ∩・ω・｀）
+♪ |　　 ⊂ﾉ
+ 　｜　　 _⊃　　♪
+ 　 し ⌒
+`
+                        state = 0;
+                        break;
+                }
+            }, 1000)
+        </script>
+    </div>
+</body>
+</html>
