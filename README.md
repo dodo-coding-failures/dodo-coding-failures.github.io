@@ -1,6 +1,5 @@
-# Custom stylized new tab page
+# Showcase, of my projects and such
 
-Made for myself.
-If you like it, cool, do whatever with it <3
+Here I guess I'll put all my webpages, programs, maybe art or something, either as links to repos or just as a part of website
 
 [Link](https://dodo-coding-failures.github.io/)
