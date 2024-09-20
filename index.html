@@ -3,44 +3,124 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Projects</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Document</title>
     <style>
-        #intro{
-            left: 50%;
-            transform: translateX(-50%);
-        }
-        #links{
-            width: 40%;
-        }
-        #links a{
-            font-weight: 700;
-            color: blue;
-            text-shadow: red 0 0 2px;
-            text-decoration: underline;
-        }
-        #links a:hover{
+
+        *{
+            margin: 0;
+            padding: 0;
+
             color: white;
+            font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+        }
+
+        /* backgrounds and body  setup */
+        body{
+            margin: 0;
+            padding: 0;
+
+            background: url(lines.jpg) no-repeat fixed,  url(sun.png) no-repeat fixed, linear-gradient(rgb(27, 4, 70) 10%, rgb(169, 12, 201) 60%) fixed;
+            background-size: 100% 50%, 40vw, cover;
+            background-position: bottom, center;
+            
+        }
+        #lines{
+            position: sticky;
+            top: 50%;
+        }
+        #lines hr{
+            position: absolute;
+            color: #00a5cb;
+            background-color: #00a5cb;
+            width: 99.9%;
+
+            animation: movement 1s infinite ease-out;
+        }
+        @keyframes movement{
+            from{
+                top: 99vh;
+                height: 2vh;
+            }
+            to{
+                top: 50vh;
+                height: 1px;
+                opacity: 40%;
+            }
+        }
+
+        /* main container */
+        main{
+            position: absolute;
+            top: 0;
+            left: 10%;
+
+            width: 80%;
+            height: 100vh;
+
+            overflow: scroll;
+            scrollbar-color: #00a5cb black;
+            scrollbar-width:auto;
+        }
+        main > section{
+            padding:5vh;
+            margin-bottom: 100px;
+
+            font-size:140%;
+
+            background-color: rgb(0, 0, 0, 0.4);
+            border-radius: 1em;
+            backdrop-filter: blur(3px)
+        }
+
+        /* links */
+        a{
+            font-weight: bold;
+            color: white;
+            text-decoration: none;
+        }
+        a:hover{
+            text-shadow: red .05em 0, blue -.05em 0;
+
+            animation: abberation .2s steps(2);
+        }
+        @keyframes abberation{
+            0%{text-shadow: red .05em 0, blue -.04em 0;}
+            60%{text-shadow: blue -.04em 0;}
+            100%{text-shadow: blue .04em 0, red -.04em 0;}
         }
     </style>
 </head>
 <body>
+    <div id="lines">
+        <!-- <hr> -->
+         <script>
+            
+         </script>
+    </div>
     <main>
-        <div id="intro">
-            <p class="boxTitle">My Projects</p>
+        <section>
+            <h1>What is it?</h1>
             <p>
-                Here is a quick main page for all my projects, links below
+                I am just a humble beginner programmer/web designer/whatever, and this is a comprehensive list (that I <s>was forced</s> wanted to create) of most of my projects. Feel free to take a look around, I'm still setting things up though, so mind that.
             </p>
-        </div>
-        <div id="links">
-            <p class="boxTitle">Linkies</p>
-            <p>Old <a href="">webpage</a> I did for a school project back in 2021 (Caution! It sucks!)</p> <br>
-            <hr> <br>
-            <p><a href="newTab/newTab.html">New tab</a> page I did during summer when I was bored (coming soon-ish)</p>
-        </div>
+        </section>
+        <section>
+            <h2><a href="newTab/newTab.html">Movable Boxes</a></h2>
+            <p>
+                small demo of movable boxes, like a window of an app (hence the styling). Simply hold the mouse down over the blue area at the top and drag it around. (Recommended on desktop)
+            </p>
+        </section>
     </main>
-    <footer>
-        <p> &copydodo 2024, <a href="https://github.com/dodo-coding-failures/dodo-coding-failures.github.io" style="color: grey; text-decoration: underline;">here's</a> the link to this repo </p>
-    </footer>
+
+    <script>
+        let el = document.getElementById('sun')
+        
+        document.addEventListener('scroll', (event)=>{
+            console.log(window.scrollY);
+            if (window.scrollY>500){
+                el.style.backgroundSize = (100-window.scrollY/5)+"%"
+            }
+        })
+    </script>
 </body>
 </html>
