@@ -1,0 +1,190 @@
+/* General */
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Tahoma;
+    /* font-family: 'ＭＳ Ｐゴシック'; */
+}
+a{
+    text-decoration: none;
+}
+body{
+    background-color: #fd5fc8;
+}
+button{
+    border: outset 2px white;
+    outline: solid black 1px;
+    
+    padding: 5px;
+    font-size: 1em;
+}
+/* button::before{
+    content: ' ';
+    position: absolute;
+    z-index: -1;
+    border: solid black 5px;
+    top: 5px;
+} */
+button:active{
+    border-style: solid;
+}
+.tooltip{
+    background-color: gray;
+    padding: 3px;
+    position: absolute;
+    left: 100%;
+    top: 0;
+    opacity: 70%;
+    visibility: hidden;
+}
+
+/* Main sections */
+main{
+    height: 100vh;
+}
+main > *{
+    background-color: #e7e7de;
+    margin: 0 20px 0 20px;
+}
+main > div{
+    border: 1.9em solid transparent;
+    border-image: url('border.png') 30;
+    border-radius: 10px;
+    
+    width: fit-content;
+    position: relative;
+    top: 0;
+    left: 0;
+    padding-top: 1.9em;
+    margin-top: 20px;
+}
+.boxTitle{
+    position: absolute;
+    top: -1.5em;
+    left: -1.3em;
+    width: 100%;
+    
+    color: white;
+    font-weight: bold;
+    
+    user-select: none;
+}
+
+#resetView{
+    position: relative;
+    margin: 0;
+    z-index: 1;
+    
+    height: 30px;
+    width: 30px;
+    background-image: url();
+    background-color: lime;
+    border: none;
+}
+#resetView:hover .tooltip{
+    visibility: visible;
+}
+#resetView:active{
+    background-image: url();
+}
+
+
+/* search */
+#search{
+    display: flex;
+    justify-content: center;
+}
+#searchBox{
+    font-size: 1em;
+    width: 90%;
+    padding: .5em;
+    
+}
+
+
+/* shortcuts */
+.container{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+
+}
+.link{
+    width: 20vw;
+    max-width: 100px;
+    padding: 10px;  
+    text-align: center;
+
+    transition: background-color 0.5s;
+}   
+.link:hover{
+    background-color: rgb(0, 255, 255, 0.5);
+}
+.icon{
+    width: 100%;
+    border-radius: 10%;
+    filter: hue-rotate(-15deg);
+}
+
+
+/* misc */
+#misc > button{
+    margin: 10px;
+}
+
+
+/* music */
+#track  > button{
+    width: 20vw;
+}
+#spotifyEmbed{
+    display: none;
+}
+
+
+/* footer/devlog? */
+footer{
+    background-color: rgb(47, 53, 138);
+    color: white;
+    margin-top: 20px;
+}
+footer > *{
+    padding: 10px;
+}
+footer .date{
+    text-decoration: underline;
+}
+
+
+/* catbox */
+#catbox{
+    position: fixed;
+    bottom: 0;
+    right: 0;
+}
+#cat{
+    font-family: 'ＭＳ Ｐゴシック';
+}
+
+
+/* Mobile devices */
+@media screen and (max-width: 650px){
+    main{
+        display: flex;
+        flex-direction: column;
+    }
+    #essentials{ order: 1;}
+    #misc{ order: 2;}
+}
+/* Desktops */
+@media screen and (min-width: 651px){
+    #misc{
+        float: left;
+        width: 30%;
+    }
+    #essentials{
+        float: left;
+        width: 70%;
+    }
+}
