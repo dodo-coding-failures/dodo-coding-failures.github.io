@@ -49,7 +49,7 @@ main > *{
 }
 main > div{
     border: 1.9em solid transparent;
-    border-image: url('border.png') 30;
+    border-image: url('../border.png') 30;
     border-radius: 10px;
     
     width: fit-content;
