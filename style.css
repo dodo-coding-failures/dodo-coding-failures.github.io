@@ -49,7 +49,6 @@ main{
     width: 80%;
     height: 100vh;
 
-    overflow: scroll;
     scrollbar-color: #00a5cb black;
     scrollbar-width:auto;
 }
