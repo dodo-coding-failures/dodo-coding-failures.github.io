@@ -66,17 +66,16 @@ main > section{
 
 /* links */
 a{
-    font-weight: bold;
     color: white;
     text-decoration: none;
 }
 a:hover{
-    text-shadow: red .05em 0, blue -.05em 0;
-
+    text-shadow: red .07em 0, blue -.07em 0;
+    text-decoration: underline;
     animation: abberation .2s steps(2);
 }
 @keyframes abberation{
-    0%{text-shadow: red .05em 0, blue -.04em 0;}
-    60%{text-shadow: blue -.04em 0;}
-    100%{text-shadow: blue .04em 0, red -.04em 0;}
+    0%{text-shadow: red .07em 0, blue -.06em 0;}
+    60%{text-shadow: blue -.06em 0;}
+    100%{text-shadow: blue .06em 0, red -.06em 0;}
 }
