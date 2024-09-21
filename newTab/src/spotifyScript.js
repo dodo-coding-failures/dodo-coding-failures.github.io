@@ -11,8 +11,7 @@ const date = new Date().getDate();
 
 
 // fetches the song only once a day
-if(localStorage.getItem('connected') === 'true'){
-
+if(localStorage.getItem('connected') === 'true'  && localStorage.getItem('refresh_token') != null){
     document.getElementById('connect').style.display = 'none';
     document.getElementById('spotifyEmbed').style.display = 'inline';
 
@@ -24,11 +23,15 @@ if(localStorage.getItem('connected') === 'true'){
     }
     displayTrack(JSON.parse(localStorage.getItem('song_of_the_day')));
 }
+else{
+    localStorage.setItem('connected', false);
+}
 // forced refresh
 document.getElementById('refresh').addEventListener('click', async function(){
     await update();
     displayTrack(JSON.parse(localStorage.getItem('song_of_the_day')));
 })
+
 
 // ---------------------
 // ------ METHODS ------
