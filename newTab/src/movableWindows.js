@@ -9,7 +9,7 @@ for (let i = 0; i < titles.length; i++) {
         document.addEventListener('mousemove', moveWindow)
     })
 
-    titles[i].addEventListener('mouseup', ()=>{
+    document.addEventListener('mouseup', ()=>{
         target = titles[i].parentElement;
         document.removeEventListener('mousemove', moveWindow)
     })
