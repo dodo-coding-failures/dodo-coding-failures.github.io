@@ -45,7 +45,7 @@ main{
 }
 main > *{
     background-color: #e7e7de;
-    margin: 0 20px 0 20px;
+    /* margin: 0 20px 0 20px; */
 }
 main > div{
     border: 1.9em solid transparent;
@@ -57,7 +57,7 @@ main > div{
     top: 0;
     left: 0;
     padding-top: 1.9em;
-    margin-top: 20px;
+    /* margin-top: 20px; */
 }
 .boxTitle{
     position: absolute;

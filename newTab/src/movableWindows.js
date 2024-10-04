@@ -1,10 +1,12 @@
 const titles = document.getElementsByClassName('boxTitle')
-let target;
+let target, offsetX, offsetY;
 
 for (let i = 0; i < titles.length; i++) {
-    titles[i].addEventListener('mousedown', ()=>{
+    titles[i].addEventListener('mousedown', (event)=>{
         target = titles[i].parentElement;
-        
+        offsetX = event.x-Number(target.style.left.split('px')[0]);
+        offsetY = event.y-Number(target.style.top.split('px')[0]);
+
         target.style.position = 'absolute';
         document.addEventListener('mousemove', moveWindow)
     })
@@ -18,6 +20,6 @@ for (let i = 0; i < titles.length; i++) {
 
 
 function moveWindow(event){
-    target.style.top = (event.y-30)+'px';
-    target.style.left = (event.x-30)+'px';
+    target.style.left = (event.x-offsetX)+'px';
+    target.style.top = (event.y-offsetY)+'px';
 }
