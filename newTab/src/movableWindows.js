@@ -4,6 +4,7 @@ let target, offsetX, offsetY;
 for (let i = 0; i < titles.length; i++) {
     titles[i].addEventListener('mousedown', (event)=>{
         target = titles[i].parentElement;
+        target.style.cursor = 'move';
         offsetX = event.x-Number(target.style.left.split('px')[0]);
         offsetY = event.y-Number(target.style.top.split('px')[0]);
 
@@ -13,6 +14,7 @@ for (let i = 0; i < titles.length; i++) {
 
     document.addEventListener('mouseup', ()=>{
         target = titles[i].parentElement;
+        target.style.cursor = 'default';
         document.removeEventListener('mousemove', moveWindow)
     })
     
