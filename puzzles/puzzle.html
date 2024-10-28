@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+    <script src="https://code.jquery.com/ui/1.14.0/jquery-ui.js"></script>
+    <script>
+        const maxPuzzles = 20, minPuzzles = 3;
+        let puzzlesOnX = 3
+        let puzzlesOnY = 3
+        let img = new Image()
+        let pieceW, pieceH
+
+        $(()=>{
+            $('#icon').off().on('mouseenter',menuSlide)
+        })
+
+        function menuSlide(){
+            $(this).off('mouseenter')
+            $('#menu').animate({left: 0}, 400)
+
+            $('#menu').off().on('mouseleave',function(){
+                $('#icon').off().on('mouseenter',menuSlide)
+                $('#menu').animate({left: -100},  400)
+            })
+        }
+
+
+        function startGame(){
+            // validating if image is provided
+            if ($('#image').prop('files').length == 0){
+                return
+            }
+            $('#startGame').attr('disabled','disabled')
+            // validating amount of puzzles horizontal
+            if ($('#elementsX').val() > maxPuzzles){
+                puzzlesOnX = maxPuzzles
+            }
+            else if ($('#elementsX').val() < minPuzzles){
+                puzzlesOnX = minPuzzles
+            }
+            else{
+                puzzlesOnX = Number($('#elementsX').val())
+            }
+            
+            // validating amount of puzzles vertical
+            if ($('#elementsY').val() > maxPuzzles){
+                puzzlesOnY = maxPuzzles
+            }
+            else if ($('#elementsY').val() < minPuzzles){
+                puzzlesOnY = minPuzzles
+            }
+            else{
+                puzzlesOnY = Number($('#elementsY').val())
+            }
+            
+
+            // image setup
+            $('#settings').fadeOut(1000)
+            readImage($('#image').prop('files')[0], (err, res)=>{
+                getImage(res).then(res => {
+                    
+                    setWorkspace(img);
+    
+                    generatePuzzleGrid(puzzlesOnX, puzzlesOnY);
+                    generatePuzzlePieces(puzzlesOnX, puzzlesOnY, img);
+                    addPieceFunctionality();
+                })
+            })
+        }
+
+        async function readImage(file, callback) {
+            const reader = new FileReader()
+            reader.onload = () => callback(null, reader.result)
+            reader.onerror = (err) =>callback(err)
+            reader.readAsDataURL(file)
+
+        }
+        async function getImage(src) {
+            // const reader = new FileReader()
+            // reader.onload = (e)=>{
+            //     console.log(e.target.result)
+            //     $('#imagePrev').attr('src', e.target.result)
+            // }
+            // reader.readAsDataURL($('#image').prop('files')[0])
+            
+            // return new Promise((resolve, reject)=>{
+            //     img = new Image()
+            //     img.src = src
+            //     img.onload =  resolve(img)
+            //     img.onerror = reject
+            // })
+            
+            return new Promise((resolve, reject)=>{
+                img.src = src
+                img.onload = ()=>{
+                    resolve(img)
+                }
+                img.onerror = reject
+            })
+        }
+
+        function setWorkspace(img){
+            let workspace = $('#puzzleWorkspace')
+            let workspaceW, workspaceH
+
+            // resizing the workspace
+            if (img.width > img.height){
+                // 33% of the width of window
+                workspaceW = window.innerWidth/3
+                console.log(workspaceW)
+                if (img.width>workspaceW){
+                    workspaceH = img.height/(img.width/workspaceW)
+                }
+                else{
+                    // workspaceW  = img.width
+                    workspaceH = img.height/(img.width/workspaceW)
+                    // workspaceH = img.height
+                }
+            }
+            else{
+                // 50% of the height of window
+                workspaceH = window.innerHeight/1.5
+
+                if(img.height>workspaceH){
+                    workspaceW = img.width/(img.height/workspaceH)
+                }
+                else{
+                    // workspaceW = img.width
+                    workspaceW = img.width/(img.height/workspaceH)
+                    // workspaceH = img.height
+                }
+            }
+            workspace.width(workspaceW+1)
+            workspace.height(workspaceH)
+
+            // positioning the workspace
+            workspace.css({
+                top: window.innerHeight/2-workspace.height()/2,
+                left: window.innerWidth/2-workspace.width()/2
+            })
+            
+            pieceW = (workspace.width()-1)/puzzlesOnX
+            pieceH = workspace.height()/puzzlesOnY
+        }
+
+        // generating (x*y) puzzle slots for pieces to snap to
+        function generatePuzzleGrid(x, y){
+            for(let i=0; i<x*y; i++){
+                let el = $('<div></div>')
+                el.addClass('pieceSlot')
+                el.addClass('id'+i)
+                el.css({
+                    width: pieceW,
+                    height: pieceH
+                })
+                $('#puzzleWorkspace').append(el)
+            }
+        }
+        
+        // generating (x*y) puzzle pieces with (img) background image
+        function generatePuzzlePieces(x, y, img){
+            for(let i=0; i<y; i++){
+                for(let j=0; j<x; j++){
+                    let el = $('<div></div>')
+                    el.addClass('piece')
+                    el.addClass('id'+(j+i*x))
+                    el.css({
+                        width: pieceW,
+                        height: pieceH,
+                        // different parts of the image achieved by moving the background image of pieces
+                        backgroundSize: x*pieceW+'px '+y*pieceH+'px',
+                        backgroundImage: 'url('+img.src+')',
+                        backgroundPositionX: 'right '+(j*pieceW+pieceW)+'px',
+                        backgroundPositionY: 'bottom '+(i*pieceH+pieceH)+'px'
+                    })
+                    randomizePosition(el)
+                    $('body').append(el)
+                }
+            }
+        }
+        
+        // randomizing the atarting position of the puzzles
+        function randomizePosition(el){
+            let maxW = window.innerWidth-pieceW
+            let maxH = window.innerHeight-pieceH
+            $(el).css({
+                left: Math.floor(Math.random()*maxW),
+                top: Math.floor(Math.random()*maxH)
+            })
+        }
+
+        // dragging pieces and snapping them to grid
+        function addPieceFunctionality(){
+            $('.piece').draggable({
+                // can't leave <body>
+                containment: 'parent',
+                // active piece always on top
+                stack: '.piece',
+                scroll: 'false'
+            })
+            $('.pieceSlot').droppable({
+                accept: '.piece',
+
+                // on dropping the piece
+                drop: function(event, ui){
+                    ui.draggable.off('dropdeactivate')
+                    // piece detached from the body and appended to the slot
+                    ui.draggable.detach().appendTo(this)
+                    ui.draggable.css({
+                        // positioned in the slot
+                        top: $(this).css('top'),
+                        left: $(this).css('left'),
+                        boxShadow: 'none'
+                    })
+                    checkCompletion()
+                    // this slot will not accept any more pieces (until this one is removed)
+                    $(this).droppable('option', 'accept', ui.draggable)
+
+                },
+                // on picking up the piece
+                activate: function(event, ui){
+                    ui.draggable.css({
+                        boxShadow: '5px 5px 0 black'
+                    })
+                },
+                // on piece leaving the slot
+                out: function(event, ui){
+                    // this slot now accepts any pieces
+                    $(this).droppable('option', 'accept', '.piece')
+                    // piece appended to body so it gets positioned properly
+                    ui.draggable.on('dropdeactivate',function(event, ui){
+                        ui.draggable.detach().appendTo('body')
+                    })
+                } 
+            })
+        }
+
+
+        // checking the completion of the puzzle
+        function checkCompletion(){
+            let completed = true
+            // check for each piece if it has the same id class as its slot
+            $('.piece').each(function(){
+                if (!$(this).parent().hasClass($(this).attr('class').split(' ')[1])){
+                    completed = false
+                }
+            })
+            // win state
+            if(completed){
+                $('.piece').draggable('disable')
+                $('.pieceSlot').droppable('disable')
+
+                $('#puzzleWorkspace').css({
+                    zIndex: '0',
+                    boxShadow: '10px 10px 0 black'
+                })
+                $('#winScreen').fadeIn(1000)
+                $(document).click(
+                    $('#winScreen').fadeOut(1000)
+                )
+            }
+        }
+
+        function resetPosition(){
+            $('.piece').each((i,el)=>{
+                $(el).detach().appendTo('body')
+                randomizePosition(el)
+            })
+        }
+    </script>
+    <style>
+        :root{
+            --primary: rgb(43, 24, 14);
+            --secondary: rgb(26, 14, 8);
+            --highlight: rgb(95, 54, 32);
+        }
+        *{
+            margin: 0;
+            padding: 0;
+            font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+            color: wheat;
+        }
+        a{
+            text-decoration: none;
+        }
+        body{
+            height: 100vh;
+            background-color: var(--primary);
+            overflow: hidden;
+        }
+        #puzzleWorkspace{
+            background-color: var(--secondary);
+
+            display: flex;
+            flex-wrap: wrap;
+            position: absolute;
+        }
+        .piece{
+            position: absolute;
+            box-shadow: 5px 5px 0 black;
+        }
+
+        /* starting screen */
+        #settings{
+            position: absolute;
+            left: 30vw;
+            top: 30vh;
+            
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            
+            width: 40vw;
+            padding: 20px 0;
+            z-index: 1;
+            background-color: var(--secondary);
+
+            box-shadow: 10px 10px black;
+        }
+        #settings>*{
+            padding: 10px;
+            width: fit-content;
+        }
+        button,  input{
+            padding: 5px;
+
+            font-weight: 800;
+            font-size: 1em;
+            border: none;
+            background-color: var(--primary);
+            box-shadow: 5px 5px black;
+        }
+        button:hover, input:hover{
+            background-color: var(--highlight);
+        }
+
+        /* menu */
+        #menu{
+            position: absolute;
+
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: start;
+
+            left: -100px;
+        }
+        #icon, #buttons{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+
+            background-color: var(--secondary);
+        }
+        #icon{
+            width: 3vw;
+            height: 3vw;
+        }
+        #icon hr{
+            width: 60%;
+            height: 2px;
+            background-color: wheat;
+            margin: .2vw 0;
+        }
+        #buttons{
+            width: 100px;
+        }
+        #menu button{
+            width: 100%;
+            background-color: var(--secondary);
+            box-shadow: none;
+            margin: .5vw 0;
+        }
+        #menu button:hover{
+            background-color: var(--highlight);
+        }
+
+
+        /* winning screen */
+        #winScreen{
+            position: absolute;
+
+            width: 100vw;
+            height: 100vh;
+            z-index: 1;
+        }
+        #winScreen img{
+            width: 100%;
+        }
+        #winScreen p{
+            position: absolute;
+            top:15%;
+
+            width: 100%;
+
+            text-align: center;
+            font-family: 'Comic Sans MS';
+            font-size: 6em;
+            font-weight: 800;
+        }
+    </style>
+</head>
+<body>
+    <div id="puzzleWorkspace"></div>
+    <div id="settings">
+        <p>Image <input type="file" accept="image/jpeg, image/png, image/gif" id="image"></p> 
+        
+        <p>Amount of pieces (horizontal) <input type="number" min="3" max="10" value="3" id="elementsX"></p>
+        <p>Amount of pieces (vertical) <input type="number" min="3" max="10" value="3" id="elementsY"></p>
+        <button onclick="startGame()" id="startGame">Puzzle up!</button>
+    </div>
+    <div id="menu">
+        <div id="buttons">
+            <button id="reset" onclick="resetPosition()">Reset  pieces</button>
+            <button id="restart" onclick="location.reload()">Restart</button>
+            <button id="goBack"><a href="../index.html">Go Back</a></button>
+        </div>
+        <div id="icon">
+            <hr>
+            <hr>
+            <hr>
+        </div>
+    </div>
+    <div id="winScreen" hidden>
+        <p>yu win!!1!</p>
+        <img src="yipee.gif" alt="" id="winGif">
+    </div>
+</body>
+</html>
