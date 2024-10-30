@@ -16,29 +16,7 @@ body{
     background-position: bottom, center;
     
 }
-#lines{
-    position: sticky;
-    top: 50%;
-}
-#lines hr{
-    position: absolute;
-    color: #00a5cb;
-    background-color: #00a5cb;
-    width: 99.9%;
 
-    animation: movement 1s infinite ease-out;
-}
-@keyframes movement{
-    from{
-        top: 99vh;
-        height: 2vh;
-    }
-    to{
-        top: 50vh;
-        height: 1px;
-        opacity: 40%;
-    }
-}
 
 /* main container */
 main{
@@ -51,16 +29,31 @@ main{
 
     scrollbar-color: #00a5cb black;
     scrollbar-width:auto;
+    
+    display: flex;
+    flex-direction: column;
+
+    /* border: red solid 2px; */
 }
-main > section{
+main > section, header{
     padding:5vh;
     margin-bottom: 100px;
 
     font-size:140%;
 
+    width: 60%;
+
     background-color: rgb(0, 0, 0, 0.4);
     border-radius: 1em;
     backdrop-filter: blur(3px)
+}
+header{
+    width: 100%;
+    align-self: center;
+}
+main > section:nth-child(2n){
+    align-self: end;
+    text-align: right;
 }
 
 /* links */
