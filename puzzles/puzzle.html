@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Puzzling...</title>
     <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
     <script src="https://code.jquery.com/ui/1.14.0/jquery-ui.js"></script>
     <script>
@@ -17,6 +17,7 @@
             $('#icon').off().on('mouseenter',menuSlide)
         })
 
+        // menu functions
         function menuSlide(){
             $(this).off('mouseenter')
             $('#menu').animate({left: 0}, 400)
@@ -26,7 +27,12 @@
                 $('#menu').animate({left: -100},  400)
             })
         }
-
+        function resetPosition(){
+            $('.piece').each((i,el)=>{
+                $(el).detach().appendTo('body')
+                randomizePosition(el)
+            })
+        }
 
         function startGame(){
             // validating if image is provided
@@ -34,6 +40,7 @@
                 return
             }
             $('#startGame').attr('disabled','disabled')
+
             // validating amount of puzzles horizontal
             if ($('#elementsX').val() > maxPuzzles){
                 puzzlesOnX = maxPuzzles
@@ -44,7 +51,6 @@
             else{
                 puzzlesOnX = Number($('#elementsX').val())
             }
-            
             // validating amount of puzzles vertical
             if ($('#elementsY').val() > maxPuzzles){
                 puzzlesOnY = maxPuzzles
@@ -55,10 +61,10 @@
             else{
                 puzzlesOnY = Number($('#elementsY').val())
             }
+            $('#settings').fadeOut(1000)
             
 
             // image setup
-            $('#settings').fadeOut(1000)
             readImage($('#image').prop('files')[0], (err, res)=>{
                 getImage(res).then(res => {
                     
@@ -78,21 +84,7 @@
             reader.readAsDataURL(file)
 
         }
-        async function getImage(src) {
-            // const reader = new FileReader()
-            // reader.onload = (e)=>{
-            //     console.log(e.target.result)
-            //     $('#imagePrev').attr('src', e.target.result)
-            // }
-            // reader.readAsDataURL($('#image').prop('files')[0])
-            
-            // return new Promise((resolve, reject)=>{
-            //     img = new Image()
-            //     img.src = src
-            //     img.onload =  resolve(img)
-            //     img.onerror = reject
-            // })
-            
+        async function getImage(src) {         
             return new Promise((resolve, reject)=>{
                 img.src = src
                 img.onload = ()=>{
@@ -115,9 +107,7 @@
                     workspaceH = img.height/(img.width/workspaceW)
                 }
                 else{
-                    // workspaceW  = img.width
                     workspaceH = img.height/(img.width/workspaceW)
-                    // workspaceH = img.height
                 }
             }
             else{
@@ -128,9 +118,7 @@
                     workspaceW = img.width/(img.height/workspaceH)
                 }
                 else{
-                    // workspaceW = img.width
                     workspaceW = img.width/(img.height/workspaceH)
-                    // workspaceH = img.height
                 }
             }
             workspace.width(workspaceW+1)
@@ -201,9 +189,9 @@
                 stack: '.piece',
                 scroll: 'false'
             })
+
             $('.pieceSlot').droppable({
                 accept: '.piece',
-
                 // on dropping the piece
                 drop: function(event, ui){
                     ui.draggable.off('dropdeactivate')
@@ -263,15 +251,9 @@
                 )
             }
         }
-
-        function resetPosition(){
-            $('.piece').each((i,el)=>{
-                $(el).detach().appendTo('body')
-                randomizePosition(el)
-            })
-        }
     </script>
     <style>
+        /* general */
         :root{
             --primary: rgb(43, 24, 14);
             --secondary: rgb(26, 14, 8);
@@ -291,6 +273,8 @@
             background-color: var(--primary);
             overflow: hidden;
         }
+
+        /* puzzle pieces */
         #puzzleWorkspace{
             background-color: var(--secondary);
 
@@ -415,7 +399,7 @@
     </div>
     <div id="menu">
         <div id="buttons">
-            <button id="reset" onclick="resetPosition()">Reset  pieces</button>
+            <button id="reset" onclick="resetPosition()">Reset pieces</button>
             <button id="restart" onclick="location.reload()">Restart</button>
             <button id="goBack"><a href="../index.html">Go Back</a></button>
         </div>
